@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kitchensink.algo package &mdash; kitchensink 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kitchensink.io package" href="kitchensink.io.html" />
+    <link rel="prev" title="kitchensink package" href="kitchensink.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> kitchensink
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kitchensink</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kitchensink.html">kitchensink package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="kitchensink.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">kitchensink.algo package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kitchensink.io.html">kitchensink.io package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kitchensink.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kitchensink.html#module-kitchensink.math">kitchensink.math module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kitchensink.html#module-kitchensink.metrics">kitchensink.metrics module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kitchensink.html#module-kitchensink.util">kitchensink.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kitchensink.html#module-kitchensink.vis">kitchensink.vis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kitchensink.html#module-kitchensink">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="kitchensink.html">kitchensink package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kitchensink.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">kitchensink.algo package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-kitchensink.algo.cluster">kitchensink.algo.cluster module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-kitchensink.algo.error">kitchensink.algo.error module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-kitchensink.algo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kitchensink.io.html">kitchensink.io package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kitchensink.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kitchensink.html#module-kitchensink.math">kitchensink.math module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kitchensink.html#module-kitchensink.metrics">kitchensink.metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kitchensink.html#module-kitchensink.util">kitchensink.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kitchensink.html#module-kitchensink.vis">kitchensink.vis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kitchensink.html#module-kitchensink">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">kitchensink</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">kitchensink</a> &raquo;</li>
+          <li><a href="kitchensink.html">kitchensink package</a> &raquo;</li>
+      <li>kitchensink.algo package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/kitchensink.algo.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="kitchensink-algo-package">
+<h1>kitchensink.algo package<a class="headerlink" href="#kitchensink-algo-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-kitchensink.algo.cluster">
+<span id="kitchensink-algo-cluster-module"></span><h2>kitchensink.algo.cluster module<a class="headerlink" href="#module-kitchensink.algo.cluster" title="Permalink to this headline"></a></h2>
+<p>Clustering algorithms</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.SOM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kitchensink.algo.cluster.</span></span><span class="sig-name descname"><span class="pre">SOM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'euclidean'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'periodic'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'random'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pca'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rect'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'hex'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'seq'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'batch'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'seq'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbour</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'gaussian'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'bubble'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'epanechnikov'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'exponential'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'linear'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'exponential'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kitchensink.algo.cluster.SOM" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>SOM - Self-Organising-Map. <a class="footnote-reference brackets" href="#id2" id="id1">2</a></p>
+<p>A 2D neural network that clusters high-dimensional data iteratively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nx</strong> – Number of neurons on x-axis.</p></li>
+<li><p><strong>ny</strong> – Number of neurons on y-axis.</p></li>
+<li><p><strong>ndims</strong> – Dimension of input data.</p></li>
+<li><p><strong>iterations</strong> – Total number of iterations to perform.
+Should be at least 10 times the number of neurons.</p></li>
+<li><p><strong>learning_rate</strong> – The learning rate specifies the tradeoff between speed and accuracy of the SOM.</p></li>
+<li><p><strong>distance</strong> – The distance metric to use.</p></li>
+<li><p><strong>init</strong> – Initialization method. “pca” uses a grid spanned by the first two
+eigenvectors of the principal component analysis of the input data.</p></li>
+<li><p><strong>grid</strong> – Layout of the SOM, can be either rectangular or hexagonal with
+equidistant nodes. The latter can provide smoother visualization.</p></li>
+<li><p><strong>train</strong> – Training algorithm to use. Sequential picks random feature vectors one
+at a time, while batch mode trains using all features per iteration.
+This can significantly speed up convergence.</p></li>
+<li><p><strong>neighbour</strong> – Type of neighbourhood decay function to use. “bubble” uses a hard
+cutoff, “gaussian” falls off smoothly, and “epanechnikov” starts
+smoothly and ends with a hard cutoff.</p></li>
+<li><p><strong>learning</strong> – Type of decay for the learning rate. A linear decay can
+improve results in certain cases.</p></li>
+<li><p><strong>seed</strong> – Seed for the random number generator.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.SOM.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#kitchensink.algo.cluster.SOM.grid" title="Permalink to this definition"></a></dt>
+<dd><p>Grid with all x, y positiions of the nodes. Useful for visualization.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.SOM.weights">
+<span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="#kitchensink.algo.cluster.SOM.weights" title="Permalink to this definition"></a></dt>
+<dd><p>Weight vectors of the SOM in shape = (nx, ny, ndims).</p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<p>Here we train a 20 by 30 SOM on some colors:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">som</span> <span class="o">=</span> <span class="n">SOM</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mf">.33</span><span class="p">,</span> <span class="mf">.33</span><span class="p">,</span> <span class="mf">.33</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mf">.66</span><span class="p">,</span> <span class="mf">.66</span><span class="p">,</span> <span class="mf">.66</span><span class="p">]]</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">som</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>Kohonen, T. Self-Organized Formation of Topologically Correct
+Feature Maps. Biological Cybernetics 43 (1), 59-69 (1982).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.SOM.create_index">
+<span class="sig-name descname"><span class="pre">create_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kitchensink.algo.cluster.SOM.create_index" title="Permalink to this definition"></a></dt>
+<dd><p>Create an index grid, allowing the coloring of the map with arbitrary
+feature data. For instance, one could train the SOM on a subset of the
+data, and then create an index using the full dataset. The transform()
+method will only need to check the created index grid featuring the
+best matching datapoint index per node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> – Input data as used to train the SOM, can be significantly larger.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.SOM.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kitchensink.algo.cluster.SOM.fit" title="Permalink to this definition"></a></dt>
+<dd><p>Run the SOM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> – Input data as array of vectors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.SOM.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#kitchensink.algo.cluster.SOM.transform" title="Permalink to this definition"></a></dt>
+<dd><p>Transform a dataset based on the index grid created by index().
+This method will return a subset of the dataset in the shape of
+the node matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> – Input data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Subset of the input data assigned to the best nodes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.cluster_multiplets">
+<span class="sig-prename descclassname"><span class="pre">kitchensink.algo.cluster.</span></span><span class="sig-name descname"><span class="pre">cluster_multiplets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kitchensink.algo.cluster.cluster_multiplets" title="Permalink to this definition"></a></dt>
+<dd><p>Merges multiplets of numbers or indices based on a distance cutoff.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Data to be clustered with shape (n_points, n_features)</p></li>
+<li><p><strong>weights</strong> – Associated weights (n_points)</p></li>
+<li><p><strong>cutoff</strong> – Associated cutoff for cluster assignment</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>ndarray</em> – Clustered data</p></li>
+<li><p><em>ndarray</em> – Associated cluster weights</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.gromos_clustering">
+<span class="sig-prename descclassname"><span class="pre">kitchensink.algo.cluster.</span></span><span class="sig-name descname"><span class="pre">gromos_clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'minkowski'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kitchensink.algo.cluster.gromos_clustering" title="Permalink to this definition"></a></dt>
+<dd><p>Cluster structures using the GROMOS <a class="footnote-reference brackets" href="#id4" id="id3">1</a> clustering algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – Points to cluster</p></li>
+<li><p><strong>cutoff</strong> – Cutoff value in nm</p></li>
+<li><p><strong>metric</strong> – Metric to use for distance calculation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>ndarray</em> – The indices of all cluster centers</p></li>
+<li><p><em>ndarray</em> – The cluster assigned to each frame of the trajectory</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets">1</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id5">2</a>)</span></dt>
+<dd><p>Daura, X. et al. Peptide Folding: When Simulation Meets Experiment.
+Angewandte Chemie International Edition 38, 236-240 (1999).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kitchensink.algo.cluster.gromos_clustering_traj">
+<span class="sig-prename descclassname"><span class="pre">kitchensink.algo.cluster.</span></span><span class="sig-name descname"><span class="pre">gromos_clustering_traj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">mdtraj.core.trajectory.Trajectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kitchensink.algo.cluster.gromos_clustering_traj" title="Permalink to this definition"></a></dt>
+<dd><p>Cluster structures using the GROMOS <a class="footnote-reference brackets" href="#id4" id="id5">1</a> clustering algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – Trajectory in mdtraj format</p></li>
+<li><p><strong>cutoff</strong> – Cutoff value in nm</p></li>
+<li><p><strong>atom_indices</strong> – Indices of the system to use for the RMSD calculation,
+uses all atoms by default.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>ndarray</em> – The indices of all cluster centers</p></li>
+<li><p><em>ndarray</em> – The cluster assigned to each frame of the trajectory</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-kitchensink.algo.error">
+<span id="kitchensink-algo-error-module"></span><h2>kitchensink.algo.error module<a class="headerlink" href="#module-kitchensink.algo.error" title="Permalink to this headline"></a></h2>
+<p>Error estimation routines based on resampling</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="kitchensink.algo.error.Error">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kitchensink.algo.error.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kitchensink.algo.error.Error" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Block Standard Error (BSE).</p>
+<p>Calculates the Block Standard Error by computing the weighted sample
+variance among blocks of the data with increasing size. An analytical
+curve is then fitted to this error data, the stationary value of which
+is the error estimate. With increasing block size, the effects of
+autocorrelation (causing an underestimation of the error) are reduced.
+Once autocorrelation is negligible, the error will reach a temporary
+stable value, before increasing again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blocks</strong> – A sequence of integers to use as blocks, or an integer. In the latter
+case, the block sizes will be chosen to be logarithmically increasing.</p></li>
+<li><p><strong>verbose</strong> – If true, will print out status messages.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kitchensink.algo.error.Error.all_errors_">
+<span class="sig-name descname"><span class="pre">all_errors_</span></span><a class="headerlink" href="#kitchensink.algo.error.Error.all_errors_" title="Permalink to this definition"></a></dt>
+<dd><p>The computed errors.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kitchensink.algo.error.Error.analytical_errors_">
+<span class="sig-name descname"><span class="pre">analytical_errors_</span></span><a class="headerlink" href="#kitchensink.algo.error.Error.analytical_errors_" title="Permalink to this definition"></a></dt>
+<dd><p>The fitted analytical error function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kitchensink.algo.error.Error.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#kitchensink.algo.error.Error.fit_predict" title="Permalink to this definition"></a></dt>
+<dd><p>Predict the errors for time-series data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Array of shape (n_samples, n_data) containing the time series data.</p></li>
+<li><p><strong>weights</strong> – 1D Array of weights of length (n_samples) for each data point.
+If not given will assume uniform weight distribution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>1D array of errors for each column of the input data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kitchensink.algo.error.bootstrap">
+<span class="sig-prename descclassname"><span class="pre">kitchensink.algo.error.</span></span><span class="sig-name descname"><span class="pre">bootstrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#kitchensink.algo.error.bootstrap" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a bootstrap estimate of a given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – One- or two-dimensional dataset of observations
+with shape (observations, features).</p></li>
+<li><p><strong>func</strong> – Function to use to compute the estimate. It should accept
+the data and a set of weights of the same length.</p></li>
+<li><p><strong>func_dim</strong> – Dimension of the array returned by <cite>func</cite>.</p></li>
+<li><p><strong>weights</strong> – Optional weights, either per-frame or additionally
+per-cluster with shape (observations, clusters).</p></li>
+<li><p><strong>n_samples</strong> – The number of samples to draw.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Bootstrap samples with shape (samples, clusters, features).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kitchensink.algo.error.circular_block_bootstrap">
+<span class="sig-prename descclassname"><span class="pre">kitchensink.algo.error.</span></span><span class="sig-name descname"><span class="pre">circular_block_bootstrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#kitchensink.algo.error.circular_block_bootstrap" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the circular block bootstrap sample for a time-correlated dataset. <a class="footnote-reference brackets" href="#id7" id="id6">3</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Trajectory or list of trajectories of shape (n_points, n_features)</p></li>
+<li><p><strong>corr</strong> – Time correlation constant in frames</p></li>
+<li><p><strong>func</strong> – The aggregation function taking a set of samples (n_points, n_features)
+with associated weights (n_points, n_clusters) and returning an aggregated
+array (n_clusters, n_features)</p></li>
+<li><p><strong>weights</strong> – Weights or list of weights (n_points, n_clusters) associated with each trajectory</p></li>
+<li><p><strong>n_samples</strong> – Number of bootstrap samples</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Bootstrap samples (n_samples, n_clusters, n_features)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id6">3</a></span></dt>
+<dd><p>Lahiri, S. N. Resampling Methods for Dependent Data.
+Springer Series in Statistics, ISBN 978-1-4419-1848-2</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-kitchensink.algo">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kitchensink.algo" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kitchensink.html" class="btn btn-neutral float-left" title="kitchensink package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="kitchensink.io.html" class="btn btn-neutral float-right" title="kitchensink.io package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Thomas Löhr.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
