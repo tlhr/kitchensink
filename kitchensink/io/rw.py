@@ -513,14 +513,14 @@ def read_multi(
     if isinstance(files, str):
         files = [files]
 
-    filelist = []  # type: List[str]
+    filelist: List[str] = []
     for file in files:
         if any(char in file for char in '*?[]'):
             filelist.extend(glob.iglob(file))
         else:
             filelist.append(file)
 
-    dflist = []  # type: List[str]
+    dflist: List[str] = []
     for i, file in enumerate(filelist):
         df = read_plumed_df(file, **kwargs)
 
