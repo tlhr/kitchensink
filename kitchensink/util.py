@@ -7,11 +7,12 @@ import itertools
 import re
 from typing import (Sequence, Union, Any, Iterator, AnyStr, Type,
                     Callable, Tuple, Optional, Dict, List, TypeVar)
+import warnings
+
+import numpy as np
 
 T = TypeVar("T")
 MaybeListType = Union[List[T], T]
-
-import numpy as np
 
 
 def typecheck(func: Callable[[Any], Any]) -> Callable[[Any], Any]:
@@ -128,6 +129,7 @@ class KeepLast(UserList):
             Data to construct the list from
         
         """
+        super().__init__()
         self.data = list(reversed(data))
 
     def pop_first(self) -> T:
@@ -406,7 +408,7 @@ def align_array(arr: np.ndarray, alignment: int=32) -> np.ndarray:
 
     extra = alignment // arr.itemsize
     buffer = np.empty(arr.size + extra, dtype=arr.dtype)
-    offset = (-buffer.ctypes.data % alignment) / arr.itemsize
+    offset = (-buffer.ctypes.data % alignment) // arr.itemsize
     newarr = buffer[offset:offset + arr.size].reshape(arr.shape)
     np.copyto(newarr, arr)
     assert (newarr.ctypes.data % alignment) == 0

@@ -206,7 +206,7 @@ def plumed_iterator(file: str) -> Iterator[List[float]]:
             yield [float(n) for n in line.split()]
 
 
-def file_length(file: str, skip_comments: bool=False) -> int:
+def file_length(file: str, skip_comments: bool=False, comment_char: str="#") -> int:
     """
     Counts number of lines in file.
 
@@ -215,8 +215,9 @@ def file_length(file: str, skip_comments: bool=False) -> int:
     file
         Path to file.
     skip_comments
-        Skipping comments is slightly slower,
-        because we have to check each line.
+        Skipping comments is slightly slower, because we have to check each line.
+    comment_char
+        Comment character
 
     Returns
     -------
@@ -228,7 +229,7 @@ def file_length(file: str, skip_comments: bool=False) -> int:
         i = -1
         if skip_comments:
             for line in f:
-                if line.startswith('#'):
+                if line.startswith(comment_char):
                     continue
                 i += 1
         else:

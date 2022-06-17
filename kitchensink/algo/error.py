@@ -3,6 +3,7 @@
 from typing import Union, List, Callable, Sequence, Optional
 
 import numpy as np
+from scipy.optimize import curve_fit
 
 
 def bootstrap(
@@ -188,6 +189,10 @@ class Error:
         self.blocks = blocks
         self.verbose = verbose
         self._blocks: np.ndarray
+        self.n_points: int
+        self.n_data: int
+        self.all_errors_: np.ndarray
+        self.analytical_errors_: np.ndarray
 
     def _bse(self, data: np.ndarray, weights: Optional[np.ndarray]=None):
         """Run the block standard error calculation."""
@@ -269,7 +274,7 @@ class Error:
             # Curve fit can fail, in which case we
             # just return the original errors
             try:
-                paras, _ = curve_fit(
+                paras, *_ = curve_fit(
                     self._func_analytical, self.blocks, self.all_errors_[:, i])
                 self.analytical_errors_[:, i] = self._func_analytical(
                     self.blocks, *paras)

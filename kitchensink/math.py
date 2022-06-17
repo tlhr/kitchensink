@@ -1,12 +1,12 @@
 """Various math routines"""
 
-from typing import Union, List, Callable, Tuple, Dict, Optional
+from typing import List, Tuple, Dict, Optional
 
 import networkx as nx
 import numba
 import numpy as np
 from scipy.linalg import eig
-from scipy.special import i0
+from scipy.special import i0  # pylint: disable=no-name-in-module
 from sklearn.neighbors import NearestNeighbors
 
 EPSILON = 1e-10
@@ -70,8 +70,8 @@ def estimate_koopman(data: List[np.ndarray], lag: int) -> np.ndarray:
     """
     try:
         import pyemma as pe
-    except ImportError as e:
-        raise ImportError("Koopman matrix estimation requires PyEMMA to be installed!")
+    except ImportError as err:
+        raise ImportError("Koopman matrix estimation requires PyEMMA to be installed!") from err
 
     cl = pe.coordinates.covariance_lagged(
         data=data, lag=lag, weights="empirical",
@@ -309,10 +309,11 @@ def grid_torus(size: int, d: int=2) -> np.ndarray:
 
 @numba.jit(nopython=True)
 def _toroidal_kde_kernel(data: np.ndarray, grid: np.ndarray, conc: int=25) -> np.ndarray:
-    n_points, n_dim = data.shape
+    n_points, _ = data.shape
     n_grid = grid.shape[0]
     summand = np.zeros((n_grid, n_grid))
-    for i in numba.prange(n_points):
+    # https://github.com/PyCQA/pylint/issues/2910
+    for i in numba.prange(n_points):  # pylint: disable=not-an-iterable
         summand += np.exp(conc * np.cos(grid - data[i]).sum(axis=2))
     return summand
 
@@ -329,7 +330,7 @@ def toroidal_kde(data: np.ndarray, size: Optional[int]=None, conc: int=25) -> np
         Number of points to evaluate on
     conc
         Concentration parameter for the KDE
-    
+
     Returns
     -------
     ndarray
@@ -341,7 +342,7 @@ def toroidal_kde(data: np.ndarray, size: Optional[int]=None, conc: int=25) -> np
         size = 100 if n_dim == 2 else np.floor(10 ** (6 / n_dim))
     grid = grid_torus(size, n_dim)
     summand = _toroidal_kde_kernel(data=data, grid=grid, conc=conc)
-    return (summand / n_points / (2 * np.pi * i0(conc)) ** n_dim)
+    return summand / n_points / (2 * np.pi * i0(conc)) ** n_dim
 
 
 def spherical_transform(vec: np.ndarray) -> np.ndarray:
@@ -552,8 +553,8 @@ def closest_reversible(K: np.ndarray, pi: Optional[np.ndarray]=None) -> np.ndarr
            Numerical Linear Algebra with Applications 22 (3), 483-499 (2015)
 
     """
+    from cvxopt import matrix, solvers  # pylint: disable=import-error,import-outside-toplevel
     def quadprog(Q: np.ndarray, f: np.ndarray, C: np.ndarray) -> np.ndarray:
-        from cvxopt import matrix, solvers
         m, n = C.shape
         Q, f, C = matrix(Q), matrix(f), matrix(C)
         return solvers.qp(Q, f, G=C, h=matrix(np.zeros(m)),

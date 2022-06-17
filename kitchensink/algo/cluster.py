@@ -157,7 +157,7 @@ def gromos_clustering(X: np.ndarray, cutoff: float, metric: str="minkowski") -> 
     n_points = X.shape[0]
 
     # We only use the radius, so no need for the actual number of neighbors
-    nn = NearestNeighbors(radius=cutoff).fit(X)
+    nn = NearestNeighbors(radius=cutoff, metric=metric).fit(X)
     points = nn.radius_neighbors(return_distance=False)
 
     # Prepare the indices, labels and the mask
@@ -387,10 +387,12 @@ class SOM:
 
     @staticmethod
     def _nb_bubble(dist: np.ndarray, sigma: float) -> np.ndarray:
+        # pylint: disable=unused-argument
         return dist
 
     @staticmethod
     def _nb_epanechnikov(dist: np.ndarray, sigma: float) -> np.ndarray:
+        # pylint: disable=unused-argument
         return np.maximum(np.zeros_like(dist), 1 - dist ** 2)
 
     def _lr_exp(self, t: int) -> float:
