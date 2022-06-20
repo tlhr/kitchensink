@@ -28,14 +28,14 @@ def cluster_multiplets(data: np.ndarray, weights: np.ndarray, cutoff: float) -> 
         Associated weights (n_points)
     cutoff
         Associated cutoff for cluster assignment
-    
+
     Returns
     -------
     ndarray
         Clustered data
     ndarray
         Associated cluster weights
-    
+
     """
     ndata = len(data)
 
@@ -76,7 +76,7 @@ def cluster_multiplets(data: np.ndarray, weights: np.ndarray, cutoff: float) -> 
 def gromos_clustering_traj(X: md.Trajectory, cutoff: float, atom_indices: Optional[np.ndarray]=None) -> Tuple[np.ndarray, np.ndarray]:
     """
     Cluster structures using the GROMOS [1]_ clustering algorithm.
-    
+
     Parameters
     ----------
     X
@@ -86,14 +86,14 @@ def gromos_clustering_traj(X: md.Trajectory, cutoff: float, atom_indices: Option
     atom_indices
         Indices of the system to use for the RMSD calculation,
         uses all atoms by default.
-    
+
     Returns
     -------
     ndarray
         The indices of all cluster centers
     ndarray
         The cluster assigned to each frame of the trajectory
-    
+
     """
     n_points = X.n_frames
 
@@ -131,7 +131,7 @@ def gromos_clustering_traj(X: md.Trajectory, cutoff: float, atom_indices: Option
 def gromos_clustering(X: np.ndarray, cutoff: float, metric: str="minkowski") -> Tuple[np.ndarray, np.ndarray]:
     """
     Cluster structures using the GROMOS [1]_ clustering algorithm.
-    
+
     Parameters
     ----------
     X
@@ -140,19 +140,19 @@ def gromos_clustering(X: np.ndarray, cutoff: float, metric: str="minkowski") -> 
         Cutoff value in nm
     metric
         Metric to use for distance calculation
-    
+
     Returns
     -------
     ndarray
         The indices of all cluster centers
     ndarray
         The cluster assigned to each frame of the trajectory
-    
+
     References
     ----------
     .. [1] Daura, X. et al. Peptide Folding: When Simulation Meets Experiment.
            Angewandte Chemie International Edition 38, 236-240 (1999).
-    
+
     """
     n_points = X.shape[0]
 

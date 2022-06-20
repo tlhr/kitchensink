@@ -14,7 +14,7 @@ def bootstrap(
         n_samples: int = 100) -> np.ndarray:
     """
     Compute a bootstrap estimate of a given dataset.
-    
+
     Parameters
     ----------
     data
@@ -30,12 +30,12 @@ def bootstrap(
         per-cluster with shape (observations, clusters).
     n_samples
         The number of samples to draw.
-    
+
     Returns
     -------
     ndarray
         Bootstrap samples with shape (samples, clusters, features).
-    
+
     """
 
     # We want list of arrays
@@ -99,17 +99,17 @@ def circular_block_bootstrap(
         Weights or list of weights (n_points, n_clusters) associated with each trajectory
     n_samples
         Number of bootstrap samples
-    
+
     Returns
     -------
     ndarray
         Bootstrap samples (n_samples, n_clusters, n_features)
-    
+
     References
     ----------
     .. [3] Lahiri, S. N. Resampling Methods for Dependent Data.
            Springer Series in Statistics, ISBN 978-1-4419-1848-2
-    
+
     """
 
     # We want list of arrays
@@ -157,7 +157,7 @@ def circular_block_bootstrap(
 class Error:
     """
     Block Standard Error (BSE).
-    
+
     Calculates the Block Standard Error by computing the weighted sample
     variance among blocks of the data with increasing size. An analytical
     curve is then fitted to this error data, the stationary value of which
@@ -165,7 +165,7 @@ class Error:
     autocorrelation (causing an underestimation of the error) are reduced.
     Once autocorrelation is negligible, the error will reach a temporary
     stable value, before increasing again.
-    
+
     Parameters
     ----------
     blocks
@@ -173,14 +173,14 @@ class Error:
         case, the block sizes will be chosen to be logarithmically increasing.
     verbose
         If true, will print out status messages.
-    
+
     Attributes
     ----------
     all_errors_
         The computed errors.
     analytical_errors_
         The fitted analytical error function.
-    
+
     """
 
     def __init__(self,
@@ -240,8 +240,7 @@ class Error:
             )
 
             if self.verbose:
-                print("{0}/{1} Length: {2}".format(
-                    j + 1, self._blocks.shape[0], length), end="\r")
+                print(f"{j+1}/{self._blocks.shape[0]} Length: {length}", end="\r")
 
             # The actual error is not the sample variance itself!
             errors.append(np.sqrt(sample_var / n_blocks))
@@ -268,8 +267,7 @@ class Error:
         # Calculate analytical errors for each column
         for i in range(self.n_data):
             if self.verbose:
-                print("Calculating analytical error: {0}/{1}".format(
-                    i, self.n_data), end="\r")
+                print(f"Calculating analytical error: {i}/{self.n_data}", end="\r")
 
             # Curve fit can fail, in which case we
             # just return the original errors
@@ -285,7 +283,7 @@ class Error:
                     weights: Optional[np.ndarray]=None) -> np.ndarray:
         """
         Predict the errors for time-series data.
-        
+
         Parameters
         ----------
         data
@@ -293,12 +291,12 @@ class Error:
         weights
             1D Array of weights of length (n_samples) for each data point.
             If not given will assume uniform weight distribution.
-        
+
         Returns
         -------
         ndarray
             1D array of errors for each column of the input data.
-        
+
         """
         self._bse(data, weights)
         self._analytical_errors()

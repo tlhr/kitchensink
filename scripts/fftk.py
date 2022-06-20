@@ -3,42 +3,13 @@
 
 import argparse
 from pathlib import Path
-from typing import Union, List, Sequence
-import warnings
+from typing import Union, Sequence
 
 import numpy as np
 import parmed as pm
 from openbabel import pybel as pb
 
-
-def handle_path(path: Union[str, Path], non_existent=False) -> Path:
-    """
-    Check path validity and return `Path` object.
-
-    Parameters
-    ----------
-    path
-        Filepath to be checked.
-    non_existent
-        If false, will raise an error if the path does not exist.
-
-    Returns
-    -------
-    path
-        The converted and existing path.
-
-    """
-    if not isinstance(path, Path):
-        try:
-            path = Path(path)
-        except Exception as err:
-            message = "Couldn't read path {0}! Original message: {1}"
-            raise ValueError(message.format(path, err))
-    if not path.exists() and not non_existent:
-        raise IOError("File {0} does not exist!".format(path))
-    if not path.parent.exists():
-        path.parent.mkdir()
-    return path
+from kitchensink.io import handle_path
 
 
 def fftk_to_gmx(pdb: Union[str, Path], psf: Union[str, Path],

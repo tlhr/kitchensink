@@ -54,19 +54,19 @@ def intrinsic_dimension(X: np.ndarray, max_neighbors: int=1000, n_jobs: int=-1) 
 def estimate_koopman(data: List[np.ndarray], lag: int) -> np.ndarray:
     """
     Estimate the Koopman matrix.
-    
+
     Parameters
     ----------
     data
         List of state vector trajectories
     lag
         Lag time for estimating the matrix
-    
+
     Returns
     -------
     ndarray
         The Koopman matrix
-    
+
     """
     try:
         import pyemma as pe
@@ -82,17 +82,17 @@ def estimate_koopman(data: List[np.ndarray], lag: int) -> np.ndarray:
 def stationary_distribution(X: np.ndarray) -> np.ndarray:
     """
     Calculate the equilibrium distribution of a transition matrix.
-    
+
     Parameters
     ----------
     X
         Row-stochastic transition matrix
-    
+
     Returns
     -------
     ndarray
         Stationary distribution, i.e. the left eigenvector associated with eigenvalue 1.
-    
+
     """
     ev, evec = eig(X, left=True, right=False)
     mu = evec.T[ev.argmax()]
@@ -294,7 +294,7 @@ def grid_torus(size: int, d: int=2) -> np.ndarray:
         Number of points for each dimension
     d
         Number of dimensions
-    
+
     Returns
     -------
     ndarray
@@ -451,12 +451,12 @@ def levi_civita(i: int, j: int, k: int) -> int:
     ----------
     i, j, k
         Indices into tensor
-    
+
     Returns
     -------
     int
         Levi-Civita symbol value
-    
+
     """
     return (i - j) * (j - k) * (k - i) // 2
 
@@ -464,19 +464,19 @@ def levi_civita(i: int, j: int, k: int) -> int:
 def triu_inverse(x: np.ndarray, n: int, offset: int=0) -> np.ndarray:
     """
     Converts flattened upper-triangular matrices into full symmetric matrices.
-    
+
     Parameters
     ----------
     x
         Flattened matrices
     n
         Size of the n * n matrix
-    
+
     Returns
     -------
     ndarray
         Array of shape (length, n, n)
-    
+
     """
     length = x.shape[0]
     mat = np.zeros((length, n, n))
@@ -489,17 +489,17 @@ def triu_inverse(x: np.ndarray, n: int, offset: int=0) -> np.ndarray:
 def matrix_inverse(mat: np.ndarray) -> np.ndarray:
     """
     Calculates the inverse of a square matrix.
-    
+
     Parameters
     ----------
     mat
         Square real matrix
-    
+
     Returns
     -------
     ndarray
         Inverse of the matrix
-    
+
     """
     eigva, eigveca = np.linalg.eigh(mat)
     inc = eigva > EPSILON
@@ -510,19 +510,19 @@ def matrix_inverse(mat: np.ndarray) -> np.ndarray:
 def covariances(data: Tuple[np.ndarray, np.ndarray]) -> Tuple[np.ndarray, np.ndarray]:
     """
     Calculates (lagged) covariances.
-    
+
     Parameters
     ----------
     data
         Data at time t and t + tau
-    
+
     Returns
     -------
     ndarray
         Inverse covariance
     ndarray
         Lagged covariance
-    
+
     """
     chil, chir = data
     norm = 1. / chil.shape[0]
@@ -541,12 +541,12 @@ def closest_reversible(K: np.ndarray, pi: Optional[np.ndarray]=None) -> np.ndarr
         Initial transition matrix
     pi
         Desired equilibrium distribution
-    
+
     Returns
     -------
     ndarray
         New transition matrix with the given equilibrium distribution
-    
+
     References
     ----------
     .. [5] Nielsen, A. J. N. et al. Computing the nearest reversible Markov chain.

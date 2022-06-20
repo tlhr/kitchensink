@@ -7,7 +7,7 @@ import numpy as np
 import numba
 
 
-def msd(trajs: Sequence[md.Trajectory], dtmax: int, nres: int) -> Tuple[np.ndarray, np.ndarray]:
+def mean_square_displacement(trajs: Sequence[md.Trajectory], dtmax: int, nres: int) -> Tuple[np.ndarray, np.ndarray]:
     """
     Calculate the mean-squared displacement (MSD) for a set of MD trajectories.
 
@@ -19,14 +19,14 @@ def msd(trajs: Sequence[md.Trajectory], dtmax: int, nres: int) -> Tuple[np.ndarr
         Maximum timestep to use
     nres
         Number of residues of the protein
-    
+
     Returns
     -------
     ndarray
         Timesteps used for the MSD
     ndarray
         Mean-square displacements
-    
+
     """
     dts = np.arange(1, dtmax)
     msds = np.empty((dts.shape[0], nres))
@@ -38,8 +38,7 @@ def msd(trajs: Sequence[md.Trajectory], dtmax: int, nres: int) -> Tuple[np.ndarr
             # limiting the maximum timestep, so we skip those.
             if traj.shape[0] < dtmax:
                 continue
-            print("{0}/{1} :: {2}/{3}".format(i + 1,
-                                              dts.shape[0], j + 1, len(trajs)), end="\r")
+            print(f"{i + 1}/{dts.shape[0]} :: {j + 1}/{len(trajs)}", end="\r")
             trajr = traj.reshape(-1, nres, 3)
             trajlen = trajr.shape[0]
 
@@ -53,17 +52,17 @@ def msd(trajs: Sequence[md.Trajectory], dtmax: int, nres: int) -> Tuple[np.ndarr
 def pairwise_rmsd(traj: md.Trajectory, verbose: bool = False) -> np.ndarray:
     """
     Computes the pairwise root-mean-square deviation for all frames in a trajectory.
-    
+
     Parameters
     ----------
     traj
         mdtraj trajectory
-    
+
     Returns
     -------
     ndarray
         Distance matrix of shape (n_frames, n_frames)
-    
+
     """
     rmsds = np.zeros((traj.n_frames, traj.n_frames), dtype=float)
     for i in range(traj.n_frames):
@@ -80,7 +79,7 @@ def jensen_shannon(a: np.ndarray, b: np.ndarray) -> float:
     """
     Compute the Jensen-Shannon divergence,
     a symmetrized form of the Kullback-Leibler divergence.
-    
+
     Parameters
     ----------
     a, b
@@ -90,7 +89,7 @@ def jensen_shannon(a: np.ndarray, b: np.ndarray) -> float:
     -------
     float
         Jensen-Shannon divergence
-    
+
     """
     m = 0.5 * (a + b)
     dam = np.nansum(a * np.log(a / m))
@@ -102,7 +101,7 @@ def jensen_shannon(a: np.ndarray, b: np.ndarray) -> float:
 def hungarian(a: np.ndarray, b: np.ndarray, alpha: float=0.5) -> float:
     """
     Computes a crude earth-movers distance using the hungarian algorithm.
-    
+
     Parameters
     ----------
     a, b
@@ -112,7 +111,7 @@ def hungarian(a: np.ndarray, b: np.ndarray, alpha: float=0.5) -> float:
     -------
     float
         Hungarian distance
-    
+
     """
     nbins = a.shape[0]
     emd = [0]
@@ -140,7 +139,7 @@ def _round(x):
 def periodic(a: np.ndarray, b: np.ndarray) -> float:
     """
     Compute the periodic distance of two (high-dimensional) angles.
-    
+
     Parameters
     ----------
     a, b
@@ -150,7 +149,7 @@ def periodic(a: np.ndarray, b: np.ndarray) -> float:
     -------
     float
         Distance
-    
+
     """
     diff = a - b
     dx = diff * INV_TWOPI
@@ -171,7 +170,7 @@ def dist_pbc(a: np.ndarray, b: np.ndarray, bvs: np.ndarray) -> Tuple[np.ndarray,
         Two list of points in 3D
     bvs
         List of 3x3 matrices representing the box vectors
-    
+
     Returns
     -------
     ndarray
@@ -207,7 +206,7 @@ def circular_distance(a: np.ndarray, b: np.ndarray) -> float:
     ----------
     a, b
         Angular vectors
-    
+
     Returns
     -------
     float

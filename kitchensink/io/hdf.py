@@ -7,14 +7,14 @@ import h5py
 def h5tree(file: Union[Path, str], depth: int=-1):
     """
     Show the contents of an HDF5 file as a tree.
-    
+
     Parameters
     ----------
     file
         Path to the HDF5 file
     depth
         Maximum depth to show (-1 for unlimited)
-    
+
     """
     def _recurse(obj: Union[h5py.Group, h5py.Dataset], counter: int=0):
         # Stop recursing when hitting the maximum depth or a dataset

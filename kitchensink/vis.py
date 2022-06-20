@@ -1,7 +1,7 @@
 """Various plotting routines"""
 
 import sys
-from typing import Union, Sequence, List, Optional
+from typing import List, Optional
 
 import matplotlib.pyplot as plt
 from matplotlib import ticker
@@ -16,9 +16,7 @@ def fast(filename: str,
          column_names: Optional[List[str]]=None,
          column_inds: Optional[List[int]]=None,
          start: int=0,
-         stop: int=sys.maxsize,
-         stat: bool=True,
-         plot: bool=True) -> None:
+         stop: int=sys.maxsize) -> None:
     """
     Plot first column with every other column and show statistical information.
 
@@ -103,7 +101,7 @@ def plot_its(its: np.ndarray, lags: np.ndarray, dt: float=1.0,
         itsm = its
 
     ax.semilogy(lags * dt, lags * dt, color="k")
-    ax.fill_between(lags * dt, ax.get_ylim()[0] * np.ones(len(lags)),
+    ax.fill_between(lags * dt, ax.get_ylim()[0] * np.ones(nlags),
                     lags * dt, color="k", alpha=0.2)
     for i in range(nits):
         ax.plot(lags * dt, itsm[i], marker="o",
@@ -180,11 +178,11 @@ def plot_ck(cke: np.ndarray, ckp: np.ndarray, lag: int, dt: float=1.0,
 
             if i == j:
                 ax.set_ylim(1 - ranges - 0.02, 1.02)
-                ax.text(0, 1 - ranges, r"{0} $\to$ {1}".format(i, j),
+                ax.text(0, 1 - ranges, fr"{i} $\to$ {j}",
                         fontsize=24, verticalalignment="center")
             else:
                 ax.set_ylim(-0.02, ranges + 0.02)
-                ax.text(0, 0.2, r"{0} $\to$ {1}".format(i, j),
+                ax.text(0, 0.2, fr"{i} $\to$ {j}",
                         fontsize=24, verticalalignment="center")
             ax.set_xticks(np.arange(0, steps * lag, lag), minor=True)
             ax.set_xticks(np.arange(0, steps * lag, 2 * lag))

@@ -1,3 +1,5 @@
+"""File IO routines"""
+
 import binascii
 from collections import OrderedDict
 from contextlib import contextmanager
@@ -8,12 +10,12 @@ from pathlib import Path
 import re
 import subprocess
 import sys
-from typing import Sequence, Union, Tuple, List, Iterator, Optional, Dict, Any, Literal
-
-MaybePathType = Union[Path, str]
+from typing import Sequence, Union, Tuple, List, Iterator, Optional, Literal
 
 import numpy as np
 import pandas as pd
+
+MaybePathType = Union[Path, str]
 
 
 def hex_to_bin(data: str) -> bytes:
@@ -24,12 +26,12 @@ def hex_to_bin(data: str) -> bytes:
     ----------
     data
         String of space-separated hex values
-    
+
     Returns
     -------
     bytes
         Resulting bytes object
-    
+
     """
     return b"".join(binascii.unhexlify(char) for char in data.split())
 
@@ -55,10 +57,9 @@ def handle_path(path: MaybePathType, non_existent: bool=False) -> Path:
         try:
             path = Path(path)
         except Exception as err:
-            message = "Couldn't read path {0}! Original message: {1}"
-            raise ValueError(message.format(path, err))
+            raise ValueError(f"Couldn't read path {path}!") from err
     if not path.exists() and not non_existent:
-        raise IOError("File {0} does not exist!".format(path))
+        raise IOError(f"File {path} does not exist!")
     if not path.parent.exists():
         path.parent.mkdir()
     return path
@@ -74,7 +75,7 @@ def patch(file: Path, diff: Path):
         File to be patched
     diff
         Diff file
-    
+
     """
     cmd = f"patch {file.as_posix()} {diff.as_posix()}"
     subprocess.run(cmd.split(), check=True)
@@ -89,7 +90,7 @@ def working_dir(path: Path):
     ----------
     path
         Working directory
-    
+
     """
     old = Path(".").absolute()
     os.chdir(path)
@@ -115,7 +116,7 @@ def is_plumed(file: str) -> bool:
         raises ValueError otherwise.
 
     """
-    with open(file, 'r') as f:
+    with open(file, "r", encoding="ascii") as f:
         head = f.readlines(0)[0]
         if head.startswith('#!'):
             return True
@@ -194,12 +195,12 @@ def plumed_iterator(file: str) -> Iterator[List[float]]:
 
     Yields
     ------
-    Iterator[List[float]]   
+    Iterator[List[float]]
         List of floats for each line read.
 
     """
     is_plumed(file)
-    with open(file, 'r') as f:
+    with open(file, "r", encoding="ascii") as f:
         for line in f:
             if line.startswith('#'):
                 continue
@@ -225,7 +226,7 @@ def file_length(file: str, skip_comments: bool=False, comment_char: str="#") -> 
         Length of the file.
 
     """
-    with open(file, 'r') as f:
+    with open(file, "r", encoding="ascii") as f:
         i = -1
         if skip_comments:
             for line in f:
@@ -526,10 +527,9 @@ def read_multi(
         df = read_plumed_df(file, **kwargs)
 
         # Horizontal concatenation requires unique column names
-        if ret.startswith('h'):
+        if ret.startswith("h"):
             dflist.append(df.rename(columns={
-                k: '{0}_{1}'.format(i, k) for k in df.columns
-                if 'time' not in k
+                k: f"{i}_{k}" for k in df.columns if "time" not in k
             }))
         else:
             dflist.append(df)
@@ -547,6 +547,6 @@ def read_multi(
         data = pd.concat(dflist).groupby(level=0).mean()
 
     else:
-        raise ValueError('{0} is not a valid return type!'.format(ret))
+        raise ValueError(f"{ret} is not a valid return type!")
 
     return data

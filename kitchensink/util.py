@@ -25,9 +25,7 @@ def typecheck(func: Callable[[Any], Any]) -> Callable[[Any], Any]:
             bound_values = sig.bind(*args, **kwargs)
             for name, value in bound_values.arguments.items():
                 if name in hints and not isinstance(value, hints[name]):
-                    raise TypeError(
-                        'Type mismatch: {0} != {1}'.format(name, hints[name])
-                    )
+                    raise TypeError(f"Type mismatch: {name} != {hints[name]}")
 
         return func(*args, **kwargs)
     return decorator
@@ -64,38 +62,38 @@ class lazy_property:
 def get_serializable_attributes(obj: object) -> Dict[str, Any]:
     """
     Finds all object attributes that are serializable with HDF5.
-    
+
     Parameters
     ----------
     obj
         Object to serialize
-    
+
     Returns
     -------
     Dict[str, Any]
         All serializable public attributes
-    
+
     """
-    VALIDS = {int, float, str, list}
+    valids = {int, float, str, list}
     return {k: v for k, v in obj.__dict__.items()
-            if any(isinstance(v, valid) for valid in VALIDS)
+            if any(isinstance(v, valid) for valid in valids)
             and not k.startswith("_")}
 
 
 def make_list(item: MaybeListType[T], cls: Type=list) -> List[T]:
     """
     Turn an object into a list, if it isn't already.
-    
+
     Parameters
     ----------
     item
         Item to contain in a list
-    
+
     Returns
     -------
     list
         List with item as only element
-    
+
     """
     if not isinstance(item, list):
         item = [item]
@@ -119,16 +117,16 @@ class ReversibleList(UserList):
 
 
 class KeepLast(UserList):
+    """
+    A list that will always keep the first item.
+
+    Parameters
+    ----------
+    data
+        Data to construct the list from
+
+    """
     def __init__(self, data: Sequence[T]):
-        """
-        Constructs a list that will always keep the first item.
-        
-        Parameters
-        ----------
-        data
-            Data to construct the list from
-        
-        """
         super().__init__()
         self.data = list(reversed(data))
 
@@ -136,12 +134,12 @@ class KeepLast(UserList):
         """
         Returns the first item from the list, but only deletes
         it if there's at least one more item in the list.
-        
+
         Returns
         -------
         Any
             First item
-        
+
         """
         if len(self) < 2:
             return self.data[-1]
@@ -159,7 +157,7 @@ def concat(data: Sequence[Sequence[T]]) -> List[T]:
 def dejitter(arr: Sequence[T]) -> List[T]:
     """
     Remove consecutive elements from list.
-    
+
     """
     new = [arr[0]]
     prev = arr[0]
@@ -192,17 +190,17 @@ def transpose(data: List[Tuple[Any]]) -> Tuple[List[Any], ...]:
 def find_blocks(data: List[bool]) -> List[Tuple[int, int]]:
     """
     Finds the starting and end point of blocks of booleans sequences.
-    
+
     Parameters
     ----------
     data
         list of boolean values
-    
+
     Returns
     -------
     List[Tuple[int, int]]
         list of tuples with start and end indices
-    
+
     """
     # Special initialisation because we could begin at 0
     prev, begin, end = False, -1, -1
@@ -226,7 +224,7 @@ def find_blocks(data: List[bool]) -> List[Tuple[int, int]]:
 def filter_glob(items: Sequence[AnyStr], patterns: Sequence[AnyStr]) -> Optional[Iterator[AnyStr]]:
     """
     Filter a sequence of objects according to a sequence of patterns.
-    
+
     Parameters
     ----------
     items
@@ -238,7 +236,7 @@ def filter_glob(items: Sequence[AnyStr], patterns: Sequence[AnyStr]) -> Optional
     -------
     Iterator[AnyStr]
         Filtered item
-    
+
     """
     for item in items:
         for pattern in patterns:
@@ -249,7 +247,7 @@ def filter_glob(items: Sequence[AnyStr], patterns: Sequence[AnyStr]) -> Optional
 def unflatten(source: np.ndarray, lengths: Sequence[int], axis: int=0) -> List[np.ndarray]:
     """
     Converts a flat array into a list of arrays, according to specified lengths.
-    
+
     Parameters
     ----------
     source
@@ -258,12 +256,12 @@ def unflatten(source: np.ndarray, lengths: Sequence[int], axis: int=0) -> List[n
         Single nested list of lengths of individual arrays
     axis
         The axis along which to split the array
-    
+
     Returns
     -------
     List[ndarray]
         List of arrays
-    
+
     """
     assert np.array(lengths).sum() == source.shape[axis], "The source array must be divisible by lengths!"
     return np.array_split(source, np.array(lengths).cumsum()[:-1], axis=axis)
@@ -274,17 +272,17 @@ def unflatten(source: np.ndarray, lengths: Sequence[int], axis: int=0) -> List[n
 def build(size: Union[int, Any]) -> Union[int, Any]:
     """
     Build an arbitrarily nested list of arrays.
-    
+
     Parameters
     ----------
     size
         (Nested) list of integers representing the sizes of the subarrays
-    
+
     Returns
     -------
     ndarray
         Nested arrays
-    
+
     """
     if isinstance(size, int):
         return np.arange(size)
