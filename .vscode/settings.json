@@ -1,0 +1,6 @@
+{
+    "pylint.args": [
+        "--disable=invalid-name",
+        "--max-line-length=120"
+    ]
+}
